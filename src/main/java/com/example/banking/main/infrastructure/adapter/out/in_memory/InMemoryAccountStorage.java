@@ -2,7 +2,6 @@ package com.example.banking.main.infrastructure.adapter.out.in_memory;
 
 import com.example.banking.main.application.port.out.AccountStorage;
 import com.example.banking.main.domain.account.Account;
-import com.example.banking.main.domain.account.AccountDoesNotExistException;
 import com.example.banking.shared.domain.Identifier;
 import org.springframework.stereotype.Repository;
 
@@ -35,14 +34,5 @@ public class InMemoryAccountStorage implements AccountStorage {
     public void delete(Identifier accountId) {
         String id = accountId.toString();
         map.remove(id);
-    }
-
-    @Override
-    public void update(Account account) throws AccountDoesNotExistException {
-        String id = account.getIdentifier().toString();
-        if (!map.containsKey(id)) {
-            throw new AccountDoesNotExistException(account.getIdentifier());
-        }
-        map.replace(account.getIdentifier().toString(), account);
     }
 }

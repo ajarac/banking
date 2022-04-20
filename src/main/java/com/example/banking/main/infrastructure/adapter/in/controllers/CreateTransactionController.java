@@ -2,6 +2,7 @@ package com.example.banking.main.infrastructure.adapter.in.controllers;
 
 import com.example.banking.main.application.service.CreateTransactionService;
 import com.example.banking.main.domain.account.AccountDoesNotExistException;
+import com.example.banking.main.domain.account.AccountWithoutEnoughBalanceException;
 import com.example.banking.main.domain.transaction.TransactionAmount;
 import com.example.banking.main.domain.transaction.TransactionType;
 import com.example.banking.main.infrastructure.adapter.in.controllers.models.CreateTransactionRequest;
@@ -28,7 +29,7 @@ public class CreateTransactionController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void create(@Valid @RequestBody CreateTransactionRequest createTransactionRequest) throws AccountDoesNotExistException {
+    public void create(@Valid @RequestBody CreateTransactionRequest createTransactionRequest) throws AccountDoesNotExistException, AccountWithoutEnoughBalanceException {
         Identifier from = new Identifier(createTransactionRequest.from);
         Identifier to = new Identifier(createTransactionRequest.to);
         TransactionAmount amount = TransactionAmount.Create(createTransactionRequest.amount);

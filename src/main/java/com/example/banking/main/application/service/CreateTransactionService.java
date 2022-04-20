@@ -5,6 +5,7 @@ import com.example.banking.main.application.port.in.MakeInternationalTransaction
 import com.example.banking.main.application.port.in.MakeLocalTransactionUseCase;
 import com.example.banking.main.application.port.in.MakeWithdrawalTransactionUseCase;
 import com.example.banking.main.domain.account.AccountDoesNotExistException;
+import com.example.banking.main.domain.account.AccountWithoutEnoughBalanceException;
 import com.example.banking.main.domain.transaction.TransactionAmount;
 import com.example.banking.main.domain.transaction.TransactionType;
 import com.example.banking.shared.domain.Identifier;
@@ -25,7 +26,7 @@ public class CreateTransactionService {
         this.makeWithdrawalTransactionUseCase = makeWithdrawalTransactionUseCase;
     }
 
-    public void facade(Identifier from, Identifier to, TransactionAmount amount, TransactionType type) throws AccountDoesNotExistException {
+    public void facade(Identifier from, Identifier to, TransactionAmount amount, TransactionType type) throws AccountDoesNotExistException, AccountWithoutEnoughBalanceException {
         switch (type) {
             case WITHDRAWAL:
                 makeWithdrawalTransactionUseCase.invoke(from, amount);

@@ -2,6 +2,7 @@ package com.example.banking.main.infrastructure.adapter.in.controllers;
 
 import com.example.banking.main.application.port.in.DeleteAccountUseCase;
 import com.example.banking.main.domain.account.AccountDoesNotExistException;
+import com.example.banking.main.domain.account.AccountWithBalanceCanNotToBeDeletedException;
 import com.example.banking.shared.domain.Identifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,7 @@ public class DeleteAccountController {
 
     @DeleteMapping("{accountId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void delete(@PathVariable String accountId) throws AccountDoesNotExistException {
+    public void delete(@PathVariable String accountId) throws AccountDoesNotExistException, AccountWithBalanceCanNotToBeDeletedException {
         Identifier identifier = new Identifier(accountId);
         deleteAccountUseCase.invoke(identifier);
     }

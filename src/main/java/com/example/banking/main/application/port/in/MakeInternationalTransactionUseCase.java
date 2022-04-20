@@ -27,7 +27,7 @@ public class MakeInternationalTransactionUseCase {
     public void invoke(Identifier from, Identifier to, TransactionAmount amount) throws AccountDoesNotExistException, AccountWithoutEnoughBalanceException {
         Optional<Account> optionalAccount = accountStorage.getById(from);
         if (optionalAccount.isEmpty()) {
-            throw new AccountDoesNotExistException(to);
+            throw new AccountDoesNotExistException(from);
         }
 
         List<Transaction> transactions = transactionStorage.getByAccountId(from);

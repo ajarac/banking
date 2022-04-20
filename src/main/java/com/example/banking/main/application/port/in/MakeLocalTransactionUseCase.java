@@ -2,13 +2,16 @@ package com.example.banking.main.application.port.in;
 
 import com.example.banking.main.application.port.out.AccountStorage;
 import com.example.banking.main.application.port.out.TransactionStorage;
+import com.example.banking.main.domain.CalculateBalanceService;
 import com.example.banking.main.domain.account.Account;
 import com.example.banking.main.domain.account.AccountDoesNotExistException;
+import com.example.banking.main.domain.account.AccountWithoutEnoughBalanceException;
 import com.example.banking.main.domain.transaction.Transaction;
 import com.example.banking.main.domain.transaction.TransactionAmount;
 import com.example.banking.shared.domain.Identifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,7 +26,7 @@ public class MakeLocalTransactionUseCase {
         this.accountStorage = accountStorage;
     }
 
-    public void invoke(Identifier from, Identifier to, TransactionAmount amount) throws AccountDoesNotExistException {
+    public void invoke(Identifier from, Identifier to, TransactionAmount amount) throws AccountDoesNotExistException, AccountWithoutEnoughBalanceException {
         Optional<Account> optionalAccountFrom = accountStorage.getById(from);
         Optional<Account> optionalAccountTo = accountStorage.getById(to);
         if (optionalAccountFrom.isEmpty()) {
@@ -31,6 +34,13 @@ public class MakeLocalTransactionUseCase {
         }
         if (optionalAccountTo.isEmpty()) {
             throw new AccountDoesNotExistException(to);
+        }
+
+        List<Transaction> transactions = transactionStorage.getByAccountId(from);
+        Integer balance = CalculateBalanceService.calculateBalance(transactions, from);
+
+        if (balance < amount.getQuantity()) {
+            throw new AccountWithoutEnoughBalanceException(from);
         }
 
         Transaction transaction = Transaction.Local(from, to, amount);

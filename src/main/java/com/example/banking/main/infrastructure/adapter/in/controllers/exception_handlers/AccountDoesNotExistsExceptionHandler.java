@@ -12,6 +12,6 @@ public class AccountDoesNotExistsExceptionHandler {
     @ExceptionHandler(value = AccountDoesNotExistException.class)
     public ResponseEntity<ExceptionDTO> exception(AccountDoesNotExistException exception) {
         ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage(), HttpStatus.NOT_FOUND.value());
-        return new ResponseEntity<ExceptionDTO>(exceptionDTO, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(exceptionDTO, HttpStatus.NOT_FOUND);
     }
 }

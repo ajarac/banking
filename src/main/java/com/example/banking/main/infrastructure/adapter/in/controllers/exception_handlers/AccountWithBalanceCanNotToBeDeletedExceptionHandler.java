@@ -12,6 +12,6 @@ public class AccountWithBalanceCanNotToBeDeletedExceptionHandler {
     @ExceptionHandler(value = AccountWithBalanceCanNotToBeDeletedException.class)
     public ResponseEntity<ExceptionDTO> exception(AccountWithBalanceCanNotToBeDeletedException exception) {
         ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage(), HttpStatus.CONFLICT.value());
-        return new ResponseEntity<ExceptionDTO>(exceptionDTO, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(exceptionDTO, HttpStatus.CONFLICT);
     }
 }

@@ -3,6 +3,7 @@ package com.example.banking.main.application.port.in;
 import com.example.banking.main.application.dto.AccountBalanceDTO;
 import com.example.banking.main.application.port.out.AccountStorage;
 import com.example.banking.main.application.port.out.TransactionStorage;
+import com.example.banking.main.domain.CalculateBalanceService;
 import com.example.banking.main.domain.account.Account;
 import com.example.banking.main.domain.account.AccountDoesNotExistException;
 import com.example.banking.main.domain.transaction.Transaction;
@@ -30,31 +31,8 @@ public class GetAccountBalanceUseCase {
         }
 
         List<Transaction> transactions = transactionStorage.getByAccountId(accountId);
-        Integer balance = calculateBalance(transactions, accountId);
+        Integer balance = CalculateBalanceService.calculateBalance(transactions, accountId);
         return new AccountBalanceDTO(accountId.toString(), balance);
     }
 
-    private Integer calculateBalance(List<Transaction> transactions, Identifier accountId) {
-        Integer balance = 0;
-        for (Transaction transaction : transactions) {
-            Integer amount = transaction.getTransactionAmount().getQuantity();
-            switch (transaction.getType()) {
-                case INTERNATIONAL:
-                case WITHDRAWAL:
-                    balance -= amount;
-                    break;
-                case DEPOSIT:
-                    balance += amount;
-                    break;
-                case LOCAL:
-                    if (transaction.getFrom().equals(accountId)) {
-                        balance -= amount;
-                    } else {
-                        balance += amount;
-                    }
-                    break;
-            }
-        }
-        return balance;
-    }
 }

@@ -48,7 +48,7 @@ class MakeLocalTransactionUseCaseTest {
 
         Throwable throwable = assertThrows(AccountDoesNotExistException.class, () -> makeLocalTransactionUseCase.invoke(from, to, amount));
 
-        assertEquals(throwable.getMessage(), "Account with id: " + from.toString() + " does not exist");
+        assertEquals(throwable.getMessage(), "Account with id: " + from.getId() + " does not exist");
     }
 
     @Test
@@ -61,7 +61,7 @@ class MakeLocalTransactionUseCaseTest {
 
         Throwable throwable = assertThrows(AccountDoesNotExistException.class, () -> makeLocalTransactionUseCase.invoke(from, to, amount));
 
-        assertEquals(throwable.getMessage(), "Account with id: " + to.toString() + " does not exist");
+        assertEquals(throwable.getMessage(), "Account with id: " + to.getId() + " does not exist");
     }
 
     @Test
@@ -76,7 +76,7 @@ class MakeLocalTransactionUseCaseTest {
 
         Throwable throwable = assertThrows(AccountWithoutEnoughBalanceException.class, () -> makeLocalTransactionUseCase.invoke(from, to, amount));
 
-        assertEquals(throwable.getMessage(), "Account with id " + from.toString() + " has not enough balance");
+        assertEquals(throwable.getMessage(), "Account with id " + from.getId() + " has not enough balance");
     }
 
     @Test

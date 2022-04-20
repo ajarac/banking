@@ -12,7 +12,7 @@ public class AccountDTO {
     }
 
     public static AccountDTO from(Account account) {
-        String id = account.getIdentifier().toString();
+        String id = account.getIdentifier().getId();
         String name = account.getName().toString();
         return new AccountDTO(id, name);
     }

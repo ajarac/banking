@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -24,7 +23,7 @@ class DeleteAccountControllerTest {
 
     @Test
     void shouldNotFoundAccountWhenDeleteAccountNonExist() throws Exception {
-        String accountId = Identifier.Create().toString();
+        String accountId = Identifier.Create().getId();
         RequestBuilder requestBuilder = delete("/accounts/" + accountId);
         mockMvc.perform(requestBuilder).andExpect(status().isNotFound());
     }

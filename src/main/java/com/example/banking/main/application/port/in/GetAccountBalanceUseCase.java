@@ -32,7 +32,7 @@ public class GetAccountBalanceUseCase {
 
         List<Transaction> transactions = transactionStorage.getByAccountId(accountId);
         Integer balance = CalculateBalanceService.calculateBalance(transactions, accountId);
-        return new AccountBalanceDTO(accountId.toString(), balance);
+        return new AccountBalanceDTO(accountId.getId(), balance);
     }
 
 }

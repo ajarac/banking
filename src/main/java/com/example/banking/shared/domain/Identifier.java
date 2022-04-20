@@ -14,8 +14,7 @@ public class Identifier {
         return new Identifier(UUID.randomUUID().toString());
     }
 
-    @Override
-    public String toString() {
+    public String getId() {
         return id;
     }
 

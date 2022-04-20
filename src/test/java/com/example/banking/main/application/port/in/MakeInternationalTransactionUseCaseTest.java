@@ -45,7 +45,7 @@ class MakeInternationalTransactionUseCaseTest {
 
         Throwable throwable = assertThrows(AccountDoesNotExistException.class, () -> makeInternationalTransactionUseCase.invoke(from, to, amount));
 
-        assertEquals(throwable.getMessage(), "Account with id: " + from.toString() + " does not exist");
+        assertEquals(throwable.getMessage(), "Account with id: " + from.getId() + " does not exist");
     }
 
     @Test
@@ -59,7 +59,7 @@ class MakeInternationalTransactionUseCaseTest {
 
         Throwable throwable = assertThrows(AccountWithoutEnoughBalanceException.class, () -> makeInternationalTransactionUseCase.invoke(from, to, amount));
 
-        assertEquals(throwable.getMessage(), "Account with id " + from.toString() + " has not enough balance");
+        assertEquals(throwable.getMessage(), "Account with id " + from.getId() + " has not enough balance");
     }
 
     @Test

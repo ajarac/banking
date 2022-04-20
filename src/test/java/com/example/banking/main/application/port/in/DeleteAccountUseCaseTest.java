@@ -59,7 +59,7 @@ class DeleteAccountUseCaseTest {
 
         Throwable throwable = assertThrows(AccountDoesNotExistException.class, () -> deleteAccountUseCase.invoke(accountId));
 
-        assertEquals(throwable.getMessage(), "Account with id: " + accountId.toString() + " does not exist");
+        assertEquals(throwable.getMessage(), "Account with id: " + accountId.getId() + " does not exist");
     }
 
     @Test
@@ -72,7 +72,7 @@ class DeleteAccountUseCaseTest {
 
         Throwable throwable = assertThrows(AccountWithBalanceCanNotToBeDeletedException.class, () -> deleteAccountUseCase.invoke(accountId));
 
-        assertEquals(throwable.getMessage(), "Account with id " + accountId.toString() + " needs to do not have balance to be deleted");
+        assertEquals(throwable.getMessage(), "Account with id " + accountId.getId() + " needs to do not have balance to be deleted");
     }
 
 }

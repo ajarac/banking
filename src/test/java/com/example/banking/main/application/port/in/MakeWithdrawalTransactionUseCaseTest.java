@@ -45,7 +45,7 @@ class MakeWithdrawalTransactionUseCaseTest {
 
         Throwable throwable = assertThrows(AccountDoesNotExistException.class, () -> makeWithdrawalTransactionUseCase.invoke(from, amount));
 
-        assertEquals(throwable.getMessage(), "Account with id: " + from.toString() + " does not exist");
+        assertEquals(throwable.getMessage(), "Account with id: " + from.getId() + " does not exist");
     }
 
     @Test
@@ -58,7 +58,7 @@ class MakeWithdrawalTransactionUseCaseTest {
 
         Throwable throwable = assertThrows(AccountWithoutEnoughBalanceException.class, () -> makeWithdrawalTransactionUseCase.invoke(from, amount));
 
-        assertEquals(throwable.getMessage(), "Account with id " + from.toString() + " has not enough balance");
+        assertEquals(throwable.getMessage(), "Account with id " + from.getId() + " has not enough balance");
     }
 
     @Test

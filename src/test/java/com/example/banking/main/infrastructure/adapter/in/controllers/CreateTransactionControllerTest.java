@@ -41,8 +41,8 @@ class CreateTransactionControllerTest {
     @Test
     public void shouldNotFoundAccountWhenCreateTransactionWithoutAccountCreated() throws Exception {
         CreateTransactionRequest createTransactionRequest = new CreateTransactionRequest();
-        createTransactionRequest.from = Identifier.Create().toString();
-        createTransactionRequest.to = Identifier.Create().toString();
+        createTransactionRequest.from = Identifier.Create().getId();
+        createTransactionRequest.to = Identifier.Create().getId();
         createTransactionRequest.amount = 50;
         createTransactionRequest.type = TransactionType.DEPOSIT.name();
         RequestBuilder requestBuilder = post("/transactions")

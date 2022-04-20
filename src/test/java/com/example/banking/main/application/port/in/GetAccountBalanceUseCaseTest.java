@@ -47,7 +47,7 @@ class GetAccountBalanceUseCaseTest {
 
         Throwable throwable = assertThrows(AccountDoesNotExistException.class, () -> getAccountBalanceUseCase.invoke(accountId));
 
-        assertEquals(throwable.getMessage(), "Account with id: " + accountId.toString() + " does not exist");
+        assertEquals(throwable.getMessage(), "Account with id: " + accountId.getId() + " does not exist");
     }
 
     @Test

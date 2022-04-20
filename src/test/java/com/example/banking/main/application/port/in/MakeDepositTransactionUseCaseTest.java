@@ -42,7 +42,7 @@ class MakeDepositTransactionUseCaseTest {
 
         Throwable throwable = assertThrows(AccountDoesNotExistException.class, () -> makeDepositTransactionUseCase.invoke(accountId, amount));
 
-        assertEquals(throwable.getMessage(), "Account with id: " + accountId.toString() + " does not exist");
+        assertEquals(throwable.getMessage(), "Account with id: " + accountId.getId() + " does not exist");
     }
 
     @Test

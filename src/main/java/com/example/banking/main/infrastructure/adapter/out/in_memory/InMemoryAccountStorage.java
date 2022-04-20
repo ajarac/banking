@@ -21,18 +21,18 @@ public class InMemoryAccountStorage implements AccountStorage {
 
     @Override
     public Optional<Account> getById(Identifier accountId) {
-        String id = accountId.toString();
+        String id = accountId.getId();
         return map.containsKey(id) ? Optional.of(map.get(id)) : Optional.empty();
     }
 
     @Override
     public void save(Account account) {
-        map.put(account.getIdentifier().toString(), account);
+        map.put(account.getIdentifier().getId(), account);
     }
 
     @Override
     public void delete(Identifier accountId) {
-        String id = accountId.toString();
+        String id = accountId.getId();
         map.remove(id);
     }
 }

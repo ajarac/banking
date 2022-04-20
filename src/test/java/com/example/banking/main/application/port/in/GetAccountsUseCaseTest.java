@@ -36,7 +36,7 @@ class GetAccountsUseCaseTest {
         AccountDTO accountDTO = accounts.stream().findFirst().get();
         // assertArrayEquals(expected, accounts);
         assertEquals(expected.size(), accounts.size());
-        assertEquals(accountDTO.id, account.getIdentifier().toString());
+        assertEquals(accountDTO.id, account.getIdentifier().getId());
         assertEquals(accountDTO.name, account.getName().toString());
     }
 

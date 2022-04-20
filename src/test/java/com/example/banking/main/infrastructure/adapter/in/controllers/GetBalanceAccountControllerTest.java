@@ -26,7 +26,7 @@ class GetBalanceAccountControllerTest {
 
     @Test
     public void shouldNotFoundIfAccountDoesNotExist() throws Exception {
-        String accountId = Identifier.Create().toString();
+        String accountId = Identifier.Create().getId();
         RequestBuilder requestBuilder = get("/accounts/" + accountId);
         mockMvc.perform(requestBuilder).andExpect(status().isNotFound());
     }

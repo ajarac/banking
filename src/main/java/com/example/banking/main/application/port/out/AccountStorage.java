@@ -12,7 +12,7 @@ public interface AccountStorage {
 
     Optional<Account> getById(Identifier accountId);
 
-    void create(Account account);
+    void save(Account account);
 
     void delete(Identifier accountId);
 }

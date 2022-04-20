@@ -16,7 +16,7 @@ public class InMemoryAccountStorage implements AccountStorage {
 
     @Override
     public List<Account> getList() {
-        return new ArrayList<Account>(map.values());
+        return new ArrayList<>(map.values());
     }
 
     @Override
@@ -26,7 +26,7 @@ public class InMemoryAccountStorage implements AccountStorage {
     }
 
     @Override
-    public void create(Account account) {
+    public void save(Account account) {
         map.put(account.getIdentifier().toString(), account);
     }
 

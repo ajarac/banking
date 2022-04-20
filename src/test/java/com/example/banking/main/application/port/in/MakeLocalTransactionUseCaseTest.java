@@ -88,11 +88,11 @@ class MakeLocalTransactionUseCaseTest {
         when(accountStorage.getById(from)).thenReturn(Optional.of(account));
         when(accountStorage.getById(to)).thenReturn(Optional.of(AccountMother.random()));
         when(transactionStorage.getByAccountId(from)).thenReturn(TransactionMother.toHaveBalanceOf(from, 50));
-        doNothing().when(transactionStorage).createTransaction(any(Transaction.class));
+        doNothing().when(transactionStorage).save(any(Transaction.class));
 
         makeLocalTransactionUseCase.invoke(from, to, amount);
 
         verify(accountStorage).getById(from);
-        verify(transactionStorage).createTransaction(any(Transaction.class));
+        verify(transactionStorage).save(any(Transaction.class));
     }
 }

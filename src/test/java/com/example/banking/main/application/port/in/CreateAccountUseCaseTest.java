@@ -28,10 +28,10 @@ class CreateAccountUseCaseTest {
     @Test
     void shouldCreateAccountAndSave() {
         AccountName accountName = AccountName.Create("Account Test");
-        doNothing().when(accountStorage).create(any(Account.class));
+        doNothing().when(accountStorage).save(any(Account.class));
 
         createAccountUseCase.invoke(accountName);
 
-        verify(accountStorage).create(argThat(account -> account.getName().equals(accountName)));
+        verify(accountStorage).save(argThat(account -> account.getName().equals(accountName)));
     }
 }

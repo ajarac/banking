@@ -16,6 +16,6 @@ public class CreateAccountUseCase {
 
     public void invoke(AccountName name) {
         Account account = Account.Create(name);
-        storage.create(account);
+        storage.save(account);
     }
 }

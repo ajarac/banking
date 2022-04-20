@@ -30,7 +30,7 @@ public class MakeDepositTransactionUseCase {
 
         Transaction transaction = Transaction.Deposit(to, amount);
 
-        transactionStorage.createTransaction(transaction);
+        transactionStorage.save(transaction);
     }
 
 }

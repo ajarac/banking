@@ -45,6 +45,6 @@ public class MakeLocalTransactionUseCase {
 
         Transaction transaction = Transaction.Local(from, to, amount);
 
-        transactionStorage.createTransaction(transaction);
+        transactionStorage.save(transaction);
     }
 }

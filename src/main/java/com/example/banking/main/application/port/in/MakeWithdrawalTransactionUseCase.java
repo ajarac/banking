@@ -38,6 +38,6 @@ public class MakeWithdrawalTransactionUseCase {
         }
 
         Transaction transaction = Transaction.Withdrawal(from, amount);
-        transactionStorage.createTransaction(transaction);
+        transactionStorage.save(transaction);
     }
 }

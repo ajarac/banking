@@ -27,7 +27,7 @@ public class InMemoryTransactionStorage implements TransactionStorage {
     }
 
     @Override
-    public void createTransaction(Transaction transaction) {
+    public void save(Transaction transaction) {
         List<String> accountsToUpdate = getAccountsToUpdate(transaction);
         for (String accountId : accountsToUpdate) {
             ArrayList<Transaction> transactions = map.getOrDefault(accountId, new ArrayList<>());

@@ -51,11 +51,11 @@ class MakeDepositTransactionUseCaseTest {
         Identifier accountId = account.getIdentifier();
         TransactionAmount amount = TransactionAmountMother.random();
         when(accountStorage.getById(accountId)).thenReturn(Optional.of(account));
-        doNothing().when(transactionStorage).createTransaction(any(Transaction.class));
+        doNothing().when(transactionStorage).save(any(Transaction.class));
 
         makeDepositTransactionUseCase.invoke(accountId, amount);
 
         verify(accountStorage).getById(accountId);
-        verify(transactionStorage).createTransaction(any(Transaction.class));
+        verify(transactionStorage).save(any(Transaction.class));
     }
 }

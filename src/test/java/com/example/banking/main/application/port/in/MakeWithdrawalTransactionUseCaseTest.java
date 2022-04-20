@@ -68,12 +68,12 @@ class MakeWithdrawalTransactionUseCaseTest {
         TransactionAmount amount = TransactionAmountMother.of(10);
         when(accountStorage.getById(from)).thenReturn(Optional.of(account));
         when(transactionStorage.getByAccountId(from)).thenReturn(TransactionMother.toHaveBalanceOf(from, 50));
-        doNothing().when(transactionStorage).createTransaction(any(Transaction.class));
+        doNothing().when(transactionStorage).save(any(Transaction.class));
 
         makeWithdrawalTransactionUseCase.invoke(from, amount);
 
         verify(accountStorage).getById(from);
-        verify(transactionStorage).createTransaction(any(Transaction.class));
+        verify(transactionStorage).save(any(Transaction.class));
     }
 
 }

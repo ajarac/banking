@@ -39,6 +39,6 @@ public class MakeInternationalTransactionUseCase {
 
         Transaction transaction = Transaction.International(from, to, amount);
 
-        transactionStorage.createTransaction(transaction);
+        transactionStorage.save(transaction);
     }
 }

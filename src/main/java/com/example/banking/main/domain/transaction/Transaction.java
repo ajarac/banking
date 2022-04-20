@@ -44,4 +44,8 @@ public class Transaction {
     public Identifier getTo() {
         return to;
     }
+
+    public TransactionAmount getTransactionAmount() {
+        return transactionAmount;
+    }
 }

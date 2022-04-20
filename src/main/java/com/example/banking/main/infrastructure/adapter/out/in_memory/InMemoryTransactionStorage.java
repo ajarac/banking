@@ -13,17 +13,7 @@ import java.util.List;
 public class InMemoryTransactionStorage implements TransactionStorage {
     private final HashMap<String, ArrayList<Transaction>> map = new HashMap<>();
 
-    @Override
-    public void createTransaction(Transaction transaction) {
-        List<String> accountsToUpdate = getAccountsToUpdate(transaction);
-        for (String accountId : accountsToUpdate) {
-            ArrayList<Transaction> transactions = map.getOrDefault(accountId, new ArrayList<>());
-            transactions.add(transaction);
-            map.put(accountId, transactions);
-        }
-    }
-
-    private List<String> getAccountsToUpdate(Transaction transaction) {
+    private static List<String> getAccountsToUpdate(Transaction transaction) {
         switch (transaction.getType()) {
             case WITHDRAWAL:
             case INTERNATIONAL:
@@ -37,7 +27,17 @@ public class InMemoryTransactionStorage implements TransactionStorage {
     }
 
     @Override
+    public void createTransaction(Transaction transaction) {
+        List<String> accountsToUpdate = getAccountsToUpdate(transaction);
+        for (String accountId : accountsToUpdate) {
+            ArrayList<Transaction> transactions = map.getOrDefault(accountId, new ArrayList<>());
+            transactions.add(transaction);
+            map.put(accountId, transactions);
+        }
+    }
+
+    @Override
     public List<Transaction> getByAccountId(Identifier accountId) {
-        return List.of();
+        return map.getOrDefault(accountId.toString(), new ArrayList<>());
     }
 }

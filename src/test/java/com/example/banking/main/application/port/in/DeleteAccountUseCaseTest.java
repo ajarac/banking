@@ -6,7 +6,6 @@ import com.example.banking.main.domain.account.Account;
 import com.example.banking.main.domain.account.AccountDoesNotExistException;
 import com.example.banking.main.domain.account.AccountMother;
 import com.example.banking.main.domain.account.AccountWithBalanceCanNotToBeDeletedException;
-import com.example.banking.main.domain.transaction.Transaction;
 import com.example.banking.main.domain.transaction.TransactionMother;
 import com.example.banking.shared.domain.Identifier;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +42,7 @@ class DeleteAccountUseCaseTest {
         Account account = AccountMother.random();
         Identifier accountId = account.getIdentifier();
         when(accountStorage.getById(eq(accountId))).thenReturn(Optional.of(account));
-        when(transactionStorage.getByAccountId(accountId)).thenReturn(emptyTransactions());
+        when(transactionStorage.getByAccountId(accountId)).thenReturn(List.of());
         doNothing().when(accountStorage).delete(eq(accountId));
 
         deleteAccountUseCase.invoke(accountId);
@@ -68,20 +67,12 @@ class DeleteAccountUseCaseTest {
         Account account = AccountMother.random();
         Identifier accountId = account.getIdentifier();
         when(accountStorage.getById(eq(accountId))).thenReturn(Optional.of(account));
-        when(transactionStorage.getByAccountId(accountId)).thenReturn(depositTransaction(accountId));
+        when(transactionStorage.getByAccountId(accountId)).thenReturn(TransactionMother.listDeposit(accountId));
         doNothing().when(accountStorage).delete(eq(accountId));
 
         Throwable throwable = assertThrows(AccountWithBalanceCanNotToBeDeletedException.class, () -> deleteAccountUseCase.invoke(accountId));
 
         assertEquals(throwable.getMessage(), "Account with id " + accountId.toString() + " needs to do not have balance to be deleted");
-    }
-
-    private List<Transaction> emptyTransactions() {
-        return List.of();
-    }
-
-    private List<Transaction> depositTransaction(Identifier accountId) {
-        return List.of(TransactionMother.deposit(accountId));
     }
 
 }

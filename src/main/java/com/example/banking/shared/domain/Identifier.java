@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Identifier {
-    private final String id;
+    public final String id;
 
     public Identifier(String id) {
         this.id = id;

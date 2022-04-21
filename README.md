@@ -5,7 +5,9 @@ This project you can have as accounts as you want and create transactions for th
 ## Run the application
 For run we can use docker:
 
-`docker run -t banking .`
+`docker build -t banking .`
+
+`docker run  -p 8080:8080 banking`
 
 ## Endpoints
 

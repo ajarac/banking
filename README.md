@@ -86,3 +86,5 @@ Response
 - Use a real db instead in memory db
 - Calculate the balance every transaction creation in account (instead calculate it in the get of balance) and save it in account in a new property. For this depends on the requirements we can use event sourcing for update the balance in account
 - Improve cache to clean it only when a transaction for X account is created
+- Update accountId to IBAN account
+- Use multi currency for transactions, (at the moment only AED)

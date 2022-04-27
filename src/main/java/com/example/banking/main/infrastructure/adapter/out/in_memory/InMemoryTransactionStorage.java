@@ -3,6 +3,7 @@ package com.example.banking.main.infrastructure.adapter.out.in_memory;
 import com.example.banking.main.application.port.out.TransactionStorage;
 import com.example.banking.main.domain.transaction.Transaction;
 import com.example.banking.shared.domain.Identifier;
+import lombok.Synchronized;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;

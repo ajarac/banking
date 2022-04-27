@@ -9,6 +9,7 @@ import com.example.banking.main.domain.account.AccountWithoutEnoughBalanceExcept
 import com.example.banking.main.domain.transaction.Transaction;
 import com.example.banking.main.domain.transaction.TransactionAmount;
 import com.example.banking.shared.domain.Identifier;
+import lombok.Synchronized;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class MakeWithdrawalTransactionUseCase {
         this.accountStorage = accountStorage;
     }
 
+    @Synchronized
     public void invoke(Identifier from, TransactionAmount amount) throws AccountDoesNotExistException, AccountWithoutEnoughBalanceException {
         Optional<Account> optionalAccount = accountStorage.getById(from);
         if (optionalAccount.isEmpty()) {

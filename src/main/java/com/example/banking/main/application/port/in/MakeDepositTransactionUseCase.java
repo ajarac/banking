@@ -7,6 +7,7 @@ import com.example.banking.main.domain.account.AccountDoesNotExistException;
 import com.example.banking.main.domain.transaction.Transaction;
 import com.example.banking.main.domain.transaction.TransactionAmount;
 import com.example.banking.shared.domain.Identifier;
+import lombok.Synchronized;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,6 +23,7 @@ public class MakeDepositTransactionUseCase {
         this.accountStorage = accountStorage;
     }
 
+    @Synchronized
     public void invoke(Identifier to, TransactionAmount amount) throws AccountDoesNotExistException {
         Optional<Account> optionalAccount = accountStorage.getById(to);
         if (optionalAccount.isEmpty()) {

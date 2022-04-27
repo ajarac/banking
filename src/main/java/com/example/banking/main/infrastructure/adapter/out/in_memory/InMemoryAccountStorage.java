@@ -3,6 +3,7 @@ package com.example.banking.main.infrastructure.adapter.out.in_memory;
 import com.example.banking.main.application.port.out.AccountStorage;
 import com.example.banking.main.domain.account.Account;
 import com.example.banking.shared.domain.Identifier;
+import lombok.Synchronized;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

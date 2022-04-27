@@ -8,6 +8,7 @@ import com.example.banking.main.domain.account.AccountDoesNotExistException;
 import com.example.banking.main.domain.account.AccountWithBalanceCanNotToBeDeletedException;
 import com.example.banking.main.domain.transaction.Transaction;
 import com.example.banking.shared.domain.Identifier;
+import lombok.Synchronized;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class DeleteAccountUseCase {
         this.transactionStorage = transactionStorage;
     }
 
+    @Synchronized
     public void invoke(Identifier accountId) throws AccountDoesNotExistException, AccountWithBalanceCanNotToBeDeletedException {
         Optional<Account> account = accountStorage.getById(accountId);
         if (account.isEmpty()) {
